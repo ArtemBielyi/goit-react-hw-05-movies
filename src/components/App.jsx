@@ -1,16 +1,18 @@
+import { NavLink, Route, Routes } from 'react-router-dom';
+import Home from './Pages/Home';
+import Movies from './Pages/Movies';
+// import { getTrandingMoviesv } from './Service/Fetch';
+// import SearchForm from './Searchform/Searchform';
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101',
-      }}
-    >
-      що ти там
+    <div>
+      <NavLink to="/">Home </NavLink>
+      <NavLink to="/movies"> Movies</NavLink>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/movies" element={<Movies />} />
+      </Routes>
     </div>
   );
 };
