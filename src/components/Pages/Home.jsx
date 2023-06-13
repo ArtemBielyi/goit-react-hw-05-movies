@@ -1,5 +1,9 @@
+import { Link, useLocation } from 'react-router-dom';
+
 import { useEffect, useState } from 'react';
-import { getTrandingMovies } from '../Service/FetchApi';
+import { getTrendingMovies } from '../Service/FetchApi';
+import MovieList from 'components/MovieList/MovieList';
+
 const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -7,9 +11,9 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
 
-    getTrandingMovies(setData)
-      .then(results => {
-        setData(results);
+    getTrendingMovies()
+      .then(data => {
+        setData(data.results);
         setLoading(false);
       })
       .catch(err => {
@@ -21,15 +25,7 @@ const Home = () => {
   return (
     <div>
       <h1>Trending today</h1>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <ul>
-          {data.map(({ id, title }) => (
-            <li key={id}>{title}</li>
-          ))}
-        </ul>
-      )}
+      {loading ? <p>Loading...</p> : <MovieList data={data} />}
     </div>
   );
 };

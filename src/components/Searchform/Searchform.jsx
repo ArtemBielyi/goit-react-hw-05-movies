@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import { toast } from 'react-toastify';
 // import css from './ SearchForm.module.css';
 
-export const SearchForm = ({ onSubmit }) => {
+const SearchForm = ({ onSubmit }) => {
   const [searchName, setSearchName] = useState('');
 
   const [prevSearchName, setPrevSearchName] = useState('');

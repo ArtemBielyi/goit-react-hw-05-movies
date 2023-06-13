@@ -7,24 +7,50 @@ const options = {
   },
 };
 
-const getTrandingMovies = async setData => {
-  return fetch(
+const getTrendingMovies = async () => {
+  const data = await fetch(
     'https://api.themoviedb.org/3/trending/movie/day?language=en-US',
     options
-  )
-    .then(res => {
-      if (!res.ok) {
-        throw new Error(`res.ok is "${res}"`);
-      }
-      return res.json();
-    })
-    .then(data => {
-      setData(data.results);
-      return data.results;
-    });
+  );
+  return data.json();
+  // return fetch(
+  //   'https://api.themoviedb.org/3/trending/movie/day?language=en-US',
+  //   options
+  // )
+  // .then(res => {
+  //   if (!res.ok) {
+  //     throw new Error(`res.ok is "${res}"`);
+  //   }
+  //   return res.json();
+  // })
+  // .then(data => {
+  //   // setData(data.results);
+  //   return data.results;
+  // });
 };
 
-export { getTrandingMovies };
+const getSearchMovies = async quary => {
+  const data = await fetch(
+    `https://api.themoviedb.org/3/search/movie?query=${quary}&include_adult=false&language=en-US&page=1`,
+    options
+  );
+  return data.json();
+};
+
+const getMovieById = async movieId => {
+  const data = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
+    options
+  );
+  return data.json();
+  // if (!movieId || movieId === '') return;
+
+  // return fetch(url, options).then(res => {
+  //   if (!res.ok) throw new Error(`res.ok is "${res.ok}"`);
+  //   return res.json();
+};
+
+export { getTrendingMovies, getSearchMovies, getMovieById };
 
 // const BASE_URL = `https://api.themoviedb.org/3/`;
 
