@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import { toast } from 'react-toastify';
-// import css from './ SearchForm.module.css';
 
 const SearchForm = ({ onSubmit }) => {
   const [searchName, setSearchName] = useState('');
@@ -15,7 +13,7 @@ const SearchForm = ({ onSubmit }) => {
     e.preventDefault();
 
     if (searchName.trim() === '') {
-      console.log('write a search query');
+      alert('write a search query');
       return;
     }
     if (searchName === prevSearchName) {

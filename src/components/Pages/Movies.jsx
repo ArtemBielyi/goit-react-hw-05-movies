@@ -25,19 +25,11 @@ const Movies = () => {
         setLoading(false);
       });
   }, [searchName]);
-  // const {
-  //   title,
-  //   overview,
-  //   genres,
-  //   poster_path: path,
-  //   vote_average: vote,
-  //   release_date: release,
-  // } = data;
+
   return (
     <div>
       <SearchForm onSubmit={handleFormSubmit} />
 
-      {/* <h1>Search Results</h1> */}
       {loading ? (
         <p>Loading...</p>
       ) : (
