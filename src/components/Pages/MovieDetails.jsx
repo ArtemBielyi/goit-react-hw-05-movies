@@ -1,6 +1,7 @@
-import { Link, Outlet, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
 import { getMovieById } from '../Service/FetchApi';
+// import BackBtn from 'components/BackBtn';
 // import Cast from 'components/Cast/Cast';
 // import Reviews from 'components/Reviews/Reviews';
 
@@ -8,6 +9,9 @@ const MovieDetails = () => {
   const { movieId } = useParams();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
+  console.log(location);
+  const prevLocation = useRef(location?.state?.from ?? '/movies');
 
   useEffect(() => {
     setLoading(true);
@@ -17,8 +21,8 @@ const MovieDetails = () => {
         setData(data);
         setLoading(false);
       })
-      .catch(err => {
-        console.error('Error:', err);
+      .catch(error => {
+        alert('error:', error);
         setLoading(false);
       });
   }, [movieId]);
@@ -36,8 +40,10 @@ const MovieDetails = () => {
   const releaseDate = `(${release?.slice(0, 4)})`;
 
   const imgPath = path ? `https://image.tmdb.org/t/p/w500${path}` : null;
+
   return (
     <div>
+      <Link to={prevLocation.current}>Back</Link>
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -52,10 +58,10 @@ const MovieDetails = () => {
           {vote && <p>User Score: {rating} / 10</p>}
           <ul>
             <li>
-              <Link to="cast">Cast</Link>
+              <Link to={'cast'}>Cast</Link>
             </li>
             <li>
-              <Link to="reviews">Reviews</Link>
+              <Link to={'reviews'}>Reviews</Link>
             </li>
           </ul>
           <Outlet />
