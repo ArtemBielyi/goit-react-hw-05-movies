@@ -1,16 +1,13 @@
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
 import { getMovieById } from '../Service/FetchApi';
-// import BackBtn from 'components/BackBtn';
-// import Cast from 'components/Cast/Cast';
-// import Reviews from 'components/Reviews/Reviews';
+import css from './MovieDetails.module.css';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const location = useLocation();
-  console.log(location);
   const prevLocation = useRef(location?.state?.from ?? '/movies');
 
   useEffect(() => {
@@ -42,32 +39,41 @@ const MovieDetails = () => {
   const imgPath = path ? `https://image.tmdb.org/t/p/w500${path}` : null;
 
   return (
-    <div>
-      <Link to={prevLocation.current}>Back</Link>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          <h1>
-            {title} {releaseDate}
-          </h1>
-          <p>Overview: {overview}</p>
-          <p>Genres: {genres && genres.map(genre => genre.name).join(', ')}</p>
-          <img src={imgPath} alt="" width={250} height={350} />
+    <Suspense>
+      <div className={css.container}>
+        <Link className={css.backLink} to={prevLocation.current}>
+          Back
+        </Link>
+        {loading ? (
+          <p className={css.loading}>Loading...</p>
+        ) : (
+          <>
+            <h1 className={css.title}>
+              {title} <span className={css.releaseDate}>{releaseDate}</span>
+            </h1>
 
-          {vote && <p>User Score: {rating} / 10</p>}
-          <ul>
-            <li>
-              <Link to={'cast'}>Cast</Link>
-            </li>
-            <li>
-              <Link to={'reviews'}>Reviews</Link>
-            </li>
-          </ul>
-          <Outlet />
-        </>
-      )}
-    </div>
+            <p className={css.overview}>Overview: {overview}</p>
+            <p className={css.genres}>
+              Genres: {genres && genres.map(genre => genre.name).join(', ')}
+            </p>
+            <img className={css.poster} src={imgPath} alt="" />
+
+            {vote && <p className={css.userScore}>User Score: {rating} / 10</p>}
+            <ul className={css.navigation}>
+              <li>
+                <Link to="cast">Cast</Link>
+              </li>
+              <li>
+                <Link to="reviews">Reviews</Link>
+              </li>
+            </ul>
+            <div className={css.reviewsContainer}>
+              <Outlet />
+            </div>
+          </>
+        )}
+      </div>
+    </Suspense>
   );
 };
 

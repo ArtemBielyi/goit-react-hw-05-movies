@@ -5,7 +5,6 @@ import { getSearchMovies } from '../Service/FetchApi';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  // const [searchName, setSearchName] = useState('');
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const location = useLocation();

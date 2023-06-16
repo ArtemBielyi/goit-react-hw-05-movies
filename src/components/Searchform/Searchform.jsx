@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import styles from './Searchform.module.css';
 
 const SearchForm = ({ onSubmit }) => {
   const [searchName, setSearchName] = useState('');
-
   const [prevSearchName, setPrevSearchName] = useState('');
 
   const handleChangeName = e => {
@@ -13,7 +13,7 @@ const SearchForm = ({ onSubmit }) => {
     e.preventDefault();
 
     if (searchName.trim() === '') {
-      alert('write a search query');
+      alert('Write a search query');
       return;
     }
     if (searchName === prevSearchName) {
@@ -29,8 +29,9 @@ const SearchForm = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <input
+        className={styles.input}
         onChange={handleChangeName}
         type="text"
         autoComplete="off"
@@ -38,8 +39,8 @@ const SearchForm = ({ onSubmit }) => {
         placeholder="Search movies"
         value={searchName}
       />
-      <button type="submit">
-        <span className="button-label">Search</span>
+      <button className={styles.button} type="submit">
+        <span className={styles.buttonLabel}>Search</span>
       </button>
     </form>
   );

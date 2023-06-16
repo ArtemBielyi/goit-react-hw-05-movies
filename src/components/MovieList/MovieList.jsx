@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const MovieList = ({ data }) => {
   const location = useLocation();
-  // console.log(location);
+
   return (
     <ul>
       {data.length !== 0 &&

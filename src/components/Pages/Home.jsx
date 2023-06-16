@@ -1,7 +1,6 @@
-// import { Link, useLocation } from 'react-router-dom';
-
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { getTrendingMovies } from '../Service/FetchApi';
+import css from './Home.module.css';
 import MovieList from 'components/MovieList/MovieList';
 
 const Home = () => {
@@ -23,10 +22,16 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Trending today</h1>
-      {loading ? <p>Loading...</p> : <MovieList data={data} />}
-    </div>
+    <Suspense>
+      <div className={css.container}>
+        <h1>Trending today</h1>
+        {loading ? (
+          <p className={css.loading}>Loading...</p>
+        ) : (
+          <MovieList data={data} />
+        )}
+      </div>
+    </Suspense>
   );
 };
 
