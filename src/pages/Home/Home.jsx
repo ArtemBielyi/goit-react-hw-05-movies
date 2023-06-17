@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useState } from 'react';
-import { getTrendingMovies } from '../Service/FetchApi';
+import { getTrendingMovies } from '../../service/FetchApi';
 import css from './Home.module.css';
 import MovieList from 'components/MovieList/MovieList';
 

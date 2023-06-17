@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { getMovieById } from '../Service/FetchApi';
+import { getMovieById } from '../../service/FetchApi';
 import css from './MovieDetails.module.css';
 
 const MovieDetails = () => {
@@ -35,8 +35,9 @@ const MovieDetails = () => {
 
   const rating = vote?.toFixed(1);
   const releaseDate = `(${release?.slice(0, 4)})`;
+  const defaultImg = `https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg`;
 
-  const imgPath = path ? `https://image.tmdb.org/t/p/w500${path}` : null;
+  const imgPath = path ? `https://image.tmdb.org/t/p/w500${path}` : defaultImg;
 
   return (
     <Suspense>
@@ -56,7 +57,7 @@ const MovieDetails = () => {
             <p className={css.genres}>
               Genres: {genres && genres.map(genre => genre.name).join(', ')}
             </p>
-            <img className={css.poster} src={imgPath} alt="" />
+            <img width={250} className={css.poster} src={imgPath} alt="" />
 
             {vote && <p className={css.userScore}>User Score: {rating} / 10</p>}
             <ul className={css.navigation}>

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getCreditsById } from 'components/Service/FetchApi';
+import { getCreditsById } from 'service/FetchApi';
+
+const defaultImg = `https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg`;
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -32,7 +34,7 @@ const Cast = () => {
               {data.map(({ id, profile_path, name, character }, index) => {
                 const IMG = profile_path
                   ? `https://image.tmdb.org/t/p/w500/${profile_path}`
-                  : null;
+                  : defaultImg;
                 return (
                   <li key={`${id}_${index}`}>
                     <img width="100" src={`${IMG}`} alt="" />

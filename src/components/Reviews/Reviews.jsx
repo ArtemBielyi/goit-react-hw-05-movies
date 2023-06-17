@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { getReviewsById } from 'components/Service/FetchApi';
+import { getReviewsById } from 'service/FetchApi';
 import { useState, useEffect } from 'react';
 
 const Reviews = () => {

@@ -1,5 +1,4 @@
-/* MovieDetails.module.css */
-.container {
+MovieDetails.module.css .container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -50,10 +49,11 @@
 
 .navigation {
   margin-top: 20px;
+  list-style: none;
 }
 
 .navigation li {
-  display: inline-block;
+  /* display: inline-block; */
   margin-right: 10px;
 }
 
@@ -76,4 +76,29 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  font-size: 18px;
+  color: #555;
 }

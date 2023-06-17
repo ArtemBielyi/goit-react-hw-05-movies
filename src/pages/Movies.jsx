@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
-import SearchForm from '../Searchform/Searchform';
-import { getSearchMovies } from '../Service/FetchApi';
+import SearchForm from '../components/Searchform/Searchform';
+import { getSearchMovies } from '../service/FetchApi';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
