@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 const Reviews = () => {
   const { movieId } = useParams();
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
@@ -21,29 +21,29 @@ const Reviews = () => {
       });
   }, [movieId]);
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (data === null) {
+    return null;
+  }
+
+  if (data.length === 0) {
+    return <p>No reviews found.</p>;
+  }
+
   return (
-    <>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          {data.length > 0 ? (
-            <ul>
-              {data.map(({ id, author, content }) => {
-                return (
-                  <li key={id}>
-                    <p>{author}</p>
-                    <p>{content}</p>
-                  </li>
-                );
-              })}
-            </ul>
-          ) : (
-            <p>No reviews found.</p>
-          )}
-        </>
-      )}
-    </>
+    <ul>
+      {data.map(({ id, author, content }) => {
+        return (
+          <li key={id}>
+            <p>{author}</p>
+            <p>{content}</p>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 

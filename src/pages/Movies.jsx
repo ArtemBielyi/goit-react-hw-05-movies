@@ -23,14 +23,13 @@ const Movies = () => {
     getSearchMovies(movieId)
       .then(({ results }) => {
         if (!results.length) {
-          setSearchParams({});
           alert(`there is no movie with the "${movieId}"`);
         }
         setData(results);
       })
       .catch(error => alert('error:' + error))
       .finally(setLoading(false));
-  }, [movieId, setSearchParams]);
+  }, [movieId]);
 
   return (
     <div>
